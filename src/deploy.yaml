@@ -35,7 +35,7 @@ spec:
         app: ignite-webapi
     spec:
       containers:
-      - name: ignte-webapi
+      - name: ignite-webapi
         image: $ACR_DNS/ignite-webapi:$BUILD_ID
         ports:
         - containerPort: 9900
