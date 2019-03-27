@@ -21,7 +21,7 @@ app.get('/api/getMessage', function (req, res) {
   
 
   // Invoke service
-  request('http://localhost:5000/api/values', function (error, response, body) {
+  request('http://ignite-webapi:9900/api/values', function (error, response, body) {
       if(error) console.log(error);
 
       res.send('Hello from WebAPP running on ' + os.hostname() + ' and ' + body );
