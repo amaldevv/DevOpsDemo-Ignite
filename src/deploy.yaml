@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ignite-webapp
+  labels:
+    name: ignite-webapp
+    app: demo
+spec:
+  containers:
+  - name: ignite-webapp
+    image: $ACR_DNS/ignite-webapp:$BUILD_ID
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-api
+  labels:
+    name: web-api
+    app: demo
+spec:
+  strategy:
+    type: Recreate
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: web-api
+        app: demo
+    spec:
+      containers:
+      - name: web-api
+        image: $ACR_DNS/ignite-webapi:$BUILD_ID
+        ports:
+        - containerPort: 9900
+          protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ignite-webapp
+  labels:
+    name: ignite-webapp
+    app: demo
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    name: ignite-webapp
+    app: demo
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api
+  labels:
+    name: web-api
+    app: demo
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 9900
+      targetPort: 9900
+      protocol: TCP
+      name: http
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    name: web-api
+    app: demo
+  type: NodePort
+---
