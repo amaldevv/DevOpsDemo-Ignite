@@ -4,7 +4,6 @@ metadata:
   name: ignite-webapp
   labels:
     name: ignite-webapp
-    app: demo
 spec:
   replicas: 1
   strategy:
@@ -30,7 +29,6 @@ metadata:
   name: ignite-webapi
   labels:
     name: ignite-webapi
-    app: demo
 spec:
   strategy:
     type: Recreate
@@ -39,7 +37,6 @@ spec:
     metadata:
       labels:
         name: ignite-webapi
-        app: demo
     spec:
       containers:
       - name: ignte-webapi
@@ -54,8 +51,7 @@ kind: Service
 metadata:
   name: ignite-webapp-loadbalancer
   labels:
-    name: ignite-webapp-loadbalancer
-    app: demo
+    app: ignite-webapp-loadbalancer
 spec:
   ports:
     # the port that this service should serve on
@@ -66,7 +62,7 @@ spec:
   # label keys and values that must match in order to receive traffic for this service
   selector:
     name: ignite-webapp
-    app: demo
+    app: ignite-webapp
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -75,7 +71,7 @@ metadata:
   name: ignite-webapi
   labels:
     name: ignite-webapi
-    app: demo
+    app:  ignite-webapi
 spec:
   ports:
     # the port that this service should serve on
@@ -86,6 +82,6 @@ spec:
   # label keys and values that must match in order to receive traffic for this service
   selector:
     name: ignite-webapi
-    app: demo
+    app:  ignite-webapi
   type: NodePort
 ---
