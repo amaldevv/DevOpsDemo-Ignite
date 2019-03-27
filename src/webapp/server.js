@@ -23,8 +23,10 @@ app.get('/api/getMessage', function (req, res) {
   // Invoke service
   request('http://localhost:5000/api/values', function (error, response, body) {
       if(error) console.log(error);
-      res.send('Hello from WebAPP running on ' + os.hostname() + ' and ' + body + ' at ' + new Date().toLocaleTimeString());
-      console.log('Hello from WebAPI running on ' + os.hostname() + ' and ' + body + ' at ' + new Date().toLocaleTimeString());
+
+      res.send('Hello from WebAPP running on ' + os.hostname() + ' and ' + body );
+      console.log('Hello from WebAPI running on ' + os.hostname() + ' and ' + body );
+
   });
 }); 
 
