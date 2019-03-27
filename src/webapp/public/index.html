@@ -61,7 +61,7 @@
     </div>
     <div><button class="button-class" type="button">Get Message</button></div>
     <div><button id="btnClear" class="button-class" style="margin-left:150px" type="button">Clear</button></div>
-    <div id="divContent" style="height:100px;overflow-y:auto;overflow-x:hidden"></div>
+    <div id="divContent" style="height:300px;overflow-y:auto;overflow-x:hidden"></div>
 
 </body>
 <script>
@@ -79,8 +79,9 @@
         $("#btnSubmit").on("click", function () {
             $.ajax({
                 url: "/api/getMessage", success: function (result) {
-                    $("#divContent").append("<br><span style='" + getStyles(result) + "'>" + result + "</span>");
+                    $("#divContent").prepend("<br><span style='" + getStyles(result) + "'>" + result + "</span>");
                     $('html, body').scrollTop($(document).height());
+                    
                 }
             });
 
