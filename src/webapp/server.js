@@ -23,13 +23,10 @@ app.get('/api/getMessage', function (req, res) {
   // Invoke service
   request('http://ignite-webapi:5000/api/values', function (error, response, body) {
       if(error) console.log(error);
-<<<<<<< HEAD
+
       res.send('Hello from WebAPP running on ' + os.hostname() + ' and ' + body );
       console.log('Hello from WebAPI running on ' + os.hostname() + ' and ' + body );
-=======
-      res.send('Hello from WebAPP running on ' + os.hostname() + ' and ' + body + ' at ' + new Date().toLocaleTimeString());
-      console.log('Hello from WebAPI running on ' + os.hostname() + ' and ' + body + ' at ' + new Date().toLocaleTimeString());
->>>>>>> 1d6596554a1159a6e273b3868dff0b762c9e4012
+
   });
 }); 
 
