@@ -2,8 +2,6 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ignite-webapp
-  labels:
-    name: ignite-webapp
 spec:
   replicas: 1
   strategy:
@@ -27,8 +25,6 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ignite-webapi
-  labels:
-    name: ignite-webapi
 spec:
   strategy:
     type: Recreate
@@ -36,7 +32,7 @@ spec:
   template:
     metadata:
       labels:
-        name: ignite-webapi
+        app: ignite-webapi
     spec:
       containers:
       - name: ignte-webapi
@@ -61,7 +57,6 @@ spec:
       name: http
   # label keys and values that must match in order to receive traffic for this service
   selector:
-    name: ignite-webapp
     app: ignite-webapp
   type: LoadBalancer
 ---
@@ -70,7 +65,6 @@ kind: Service
 metadata:
   name: ignite-webapi
   labels:
-    name: ignite-webapi
     app:  ignite-webapi
 spec:
   ports:
